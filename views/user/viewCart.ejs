@@ -1,0 +1,241 @@
+<%-include('_header.ejs') -%>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Show/Hide Details</title>
+<style>
+    #details {
+        display: none;
+    }
+</style>
+
+
+
+    <!--header area start-->
+
+    <!--offcanvas menu area start-->
+    <div class="off_canvars_overlay">
+
+    </div>
+    <!-- <style>
+        /* Styling for the offer details table row */
+        #couponModel {
+            background-color: #f7f7f7;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+    
+        /* Styling for the coupon message */
+        #couponMessage {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    
+        /* Styling for the coupon discount */
+        #couponDiscount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c; /* Red color for emphasis */
+        }
+    
+        /* Styling for the sub total text */
+        #subTotalText {
+            font-size: 16px;
+            color: #666;
+        }
+    
+        /* Styling for the sub total */
+        #subTotal {
+            font-size: 22px;
+            font-weight: bold;
+            color: #27ae60; /* Green color for emphasis */
+        }
+    </style> -->
+
+
+    <!--offcanvas menu area end-->
+    <%-include('_head_section.ejs') -%>
+
+        <!--header area end-->
+
+        <!--breadcrumbs area start-->
+        <div class="breadcrumbs_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb_content">
+                            <h3>Cart</h3>
+                            <ul>
+                                <li><a href="index.html">home</a></li>
+                                <li>Shopping Cart</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs area end-->
+
+        <!--shopping cart area start -->
+        <div class="shopping_cart_area mt-100">
+            <div class="container">
+                <form action="#">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table_desc">
+                                <div class="cart_page table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th class="product_remove">Delete</th>
+                                                <th class="product_thumb">Image</th>
+                                                <th class="product_name">Product</th>
+                                                <th class="product-price">Price</th>
+                                                <th class="product_quantity">Quantity</th>
+                                                <th class="product_total">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="cart-container">
+                                            <% let total = 0; %>
+                                            <% cart.forEach((item)=> { %>
+                                                <tr id="row<%= item.product.id %>">
+                                                    <input type="hidden" id="product_id<%= item.product.id %>"
+                                                        value="<%= item.product.id %>">
+                                                    <input type="hidden" name="cart_id" value="<%= item.id %>">
+                                                    <td class="product_remove">
+                                                        <a
+                                                            onclick="removeCartalert('<%= item.product.id %>', '<%= item.id %>')">
+                                                            <i class="fa fa-trash-o"></i>
+                                                        </a>
+                                                    </td>
+                                                    <td class="product_thumb">
+                                                        <a href=/productview?id=<%= item.product._id %>><img src="<%= item.product.imageUrl[0].url %>" alt=""></a>
+                                                    </td>
+                                                    <td class="product_name">
+                                                        <%= item.product.product_name %>
+                                                    </td>
+                                                    <td class="product-price" id="product-price-<%= item.product.id %>">
+                                                        &#x20B9;<%= item.product.price - (item.product.price * (item.product.categoryID.offer / 100)) %>/-
+                                                    </td>
+                                                    <input type="hidden" name="productId"
+                                                        value="<%= item.product._id %>">
+
+                                                    <input type="hidden" name="productprice"
+                                                        value="<%= item.product.price %>">
+
+
+                                                    <td class="product_quantity">
+                                                        <div class="cart-product-quantity">
+
+                                                            <div class="input-group  input-spinner">
+                                                                <div class="input-group-prepend">
+                                                                    <button
+                                                                        onclick="totalPrice('<%= item.product._id %>','dec')"
+                                                                        style="min-width: 26px"
+                                                                        class="btn btn-decrement btn-spinner"
+                                                                        type="button">
+                                                                        -
+                                                                    </button>
+                                                                </div>
+
+                                                                <input disabled type="number"
+                                                                    id="<%= item.product._id %>"
+                                                                    style="text-align: center;" class="form-control"
+                                                                    name="num-product" value="<%= item.quantity %>">
+
+
+                                                                <div class="input-group-append">
+                                                                    <button
+                                                                        onclick="totalPrice('<%= item.product._id %>','inc','<%= item.product.stock %>')"
+                                                                        style="min-width: 26px"
+                                                                        class="btn btn-increment btn-spinner"
+                                                                        type="button">
+                                                                        +
+                                                                    </button>
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+                                                    </td>
+
+                                                    
+                                                    <td name="productTotal" data-label="Total"
+                                                        class="ec-cart-pro-subtotal">
+                                                        <span id="total-<%= item.product._id %>">
+                                                            &#x20B9; <%= (item.product.price - (item.product.price * (item.product.categoryID.offer / 100))) * item.quantity %>
+                                                            <% total += (item.product.price - (item.product.price * (item.product.categoryID.offer / 100))) * item.quantity %>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <% }) %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- <div class="cart_submit">
+                                    <a href="/updateCart"> <button type="submit">update cart</button></a>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-6 col-md-6">
+                        <div class="coupon_code right">
+                            <h3>Cart Totals</h3>
+                            <div class="coupon_inner">
+                              
+                                <div class="cart_subtotal ">
+                                    <p>Shipping</p>
+                                    <p class="cart_amount"><span></span> 0.00</p>
+                                </div>
+
+                                <input type="hidden" id="subTotalValue" value="<%= subTotal %>">
+
+                                <div class="cart_subtotal">
+                                   <h2><p>Total</p></h2> 
+                                   <h4> <strong class="text-right" id="subTotal">
+                                    &#x20B9;<%=total%>
+                                    </strong></h4>
+
+
+
+
+                                </div>
+                                <!-- <a href="#">Calculate shipping</a> -->
+
+                                <!-- <div class="cart_subtotal">
+                                    <p>Total</p>
+                                    <input type="hidden" id="subTotalValue" value="<%= subTotal %>">
+
+                                    <h4><strong class="text-right" id="subTotal2">
+                                        <%=subTotal%>/-
+                                    </strong></h4>
+
+
+                                </div> -->
+                                <div class="checkout_btn">
+                                    <a href="/checkout">Proceed to Checkout</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                
+
+                </form>
+            </div>
+        </div>
+        <!--shopping cart area end -->
+      
+
+        <!--footer area start-->
+        <%-include('_footer.ejs') -%>
+
+
+
+
+
+
+
+
+
+            <!--footer area end-->

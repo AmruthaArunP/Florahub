@@ -1,0 +1,135 @@
+<%-include('./_header.ejs') -%>
+<body>
+    <%-include('./_head_section.ejs') -%>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      display: block;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    
+    .otp-container {
+      background-color: #ffffff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    
+    h1 {
+      color: #333333;
+      margin: 0;
+      margin-bottom: 30px;
+    }
+    
+    .otp-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .otp-input input {
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      text-align: center;
+      border: none;
+      border-radius: 50%;
+      background-color: #f2f2f2;
+      margin: 0 10px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out;
+    }
+    
+    .otp-input input:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .otp-submit {
+      margin-top: 30px;
+      text-align: center;
+    }
+    
+    .otp-submit button {
+      padding: 10px 30px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease-in-out;
+    }
+    
+    .otp-submit button:hover {
+      background-color: #45A049;
+    }
+  </style>
+</head>
+<body>
+  <form action="/verifyForgotOtp" class="otp-container" method="post" >
+    <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Verify OTP</h1>
+   <p>Please enter the One time password</p>
+   <div class="otp-input">
+    <input type="text" name="txt1" maxlength="1" pattern="[0-9]" autofocus oninput="handleOtpInput(this, 'txt2')">
+    <input type="text" name="txt2" maxlength="1" pattern="[0-9]" oninput="handleOtpInput(this, 'txt3')">
+    <input type="text" name="txt3" maxlength="1" pattern="[0-9]" oninput="handleOtpInput(this, 'txt4')">
+    <input type="text" name="txt4" maxlength="1" pattern="[0-9]">
+    
+  </div>
+  <div id="otp-timer"></div>
+  <h4 class="tex"><%= invalidOtp%></h4>
+    <div class="recover">
+        <a href="/resendForgotPasswordotp">Resend OTP</a>
+    </div>
+    <div class="otp-submit">
+      <button type="submit">Verify</button>
+    </div>
+  </form>
+
+  <script>
+    function handleOtpInput(input, nextInputId) {
+      console.log(11);
+  const maxLength = input.getAttribute('maxlength');
+  const inputValue = input.value;
+
+  if (inputValue.length >= maxLength) {
+    const nextInput = document.getElementsByName(nextInputId)[0];
+    nextInput.focus();
+  }
+}
+function startOTPTimer(duration, displayElement) {
+  let timer = duration, minutes, seconds;
+
+  const intervalId = setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
+    displayElement.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      clearInterval(intervalId);
+      // Handle timeout here (e.g., show resend button)
+    }
+  }, 1000);
+}
+
+// Example usage with 5 minutes (300 seconds) duration
+const otpDuration = 60; // 5 minutes
+const otpTimerDisplay = document.getElementById("otp-timer");
+startOTPTimer(otpDuration, otpTimerDisplay);
+
+  </script>
+
+
+
+<%-include('./_footer.ejs') -%>

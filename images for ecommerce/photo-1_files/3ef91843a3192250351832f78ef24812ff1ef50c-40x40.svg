@@ -1,0 +1,8 @@
+<svg viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg" id="Layer_1">
+  <defs>
+    <style>
+      .cls-1{fill:none;stroke:#00ab84;stroke-linecap:round;stroke-miterlimit:10;stroke-width:1.27px}
+    </style>
+  </defs>
+  <path d="M20 28.31A8.31 8.31 0 1128.31 20 8.31 8.31 0 0120 28.31zM20 1v5.66m0 26.55V39M39 20h-5.66M6.79 20H1M33.42 6.58l-4 4M10.67 29.33l-4.09 4.09M6.58 6.58l4 4m18.75 18.75l4.09 4.09" class="cls-1"></path>
+</svg>

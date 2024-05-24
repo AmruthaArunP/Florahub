@@ -1,0 +1,281 @@
+<%-include('_header.ejs') -%>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!--header area start-->
+
+    <!--offcanvas menu area start-->
+    <div class="off_canvars_overlay">
+
+    </div>
+
+
+    <!--offcanvas menu area end-->
+    <%-include('_head_section.ejs') -%>
+
+        <!--header area end-->
+
+        <!--breadcrumbs area start-->
+        <div class="breadcrumbs_area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb_content">
+                            <ul>
+                                <li><a href="index.html">home</a></li>
+                                <li>Product Details</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--breadcrumbs area end-->
+
+        <!--product details start-->
+        <div class="product_details mt-100 mb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product-details-tab">
+                            <div id="img-1" class="zoomWrapper single-zoom">
+                                <a>
+                                    <img id="zoom1" src="<%= image[0].url%>" data-zoom-image="<%= image[0].url%>"
+                                        alt="big-1">
+                                </a>
+                            </div>
+                            <div class="single-zoom-thumb">
+                                <ul class="s-tab-zoom owl-carousel single-product-active" id="gallery_01">
+                                    <% image.forEach(function(img, index) { %>
+                                        <li>
+                                            <a class="elevatezoom-gallery active" data-update=""
+                                                data-image="<%= img.url %>" data-zoom-image="<%= image[0].url %>">
+                                                <img src="<%= img.url %>" alt="zo-th-<%= index + 1 %>" />
+                                            </a>
+                                        </li>
+                                        <% }); %>
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="product_d_right">
+                            <form>
+
+                                <h1><a>
+                                        <%=product.product_name%>
+                                    </a></h1>
+
+                              
+                                <div class="price_box">
+                                    <% if (product.categoryID.offer) { %>
+
+                                        <span class="current_price">&#x20B9; <%= (product.price - (product.price * (product.categoryID.offer / 100))) %>/-</span>
+                                        <span style="text-decoration: line-through;">&#x20B9; <%= product.price %></span>
+                                      <% }else{ %>
+                                        <span >&#x20B9; <%= product.price %></span>
+                                      <% } %>
+
+                                </div>
+                                <div class="product_desc">
+                                    <p>
+                                        <%=product.product_details%>
+                                    </p>
+                                </div>
+
+                                <div class="product_variant quantity">
+                                    <label>quantity</label>
+                                    <input min="1" max="<%= product.stock %>" id="<%= product.id %>" value="1" type="number">
+                                    <% if (product.stock) { %>
+
+
+                                        <% if (userDatas) { %>
+
+
+                                            <% if (product.isOnCart) { %>
+
+                                                <button class="button"><a href="/viewCart/?id=<%= userData._id %>">Go To
+                                                        Cart</a></button>       
+
+                                                <% } else { %>
+                                                    <button class="button" onclick="addToCart('<%= product.id %>')"
+                                                        id="addToCartBtn">add to cart</button>
+
+
+                                                    <% } %>
+
+
+                                                        <% } else { %>
+                                                            <button class="button"><a href="/user_login">Add to
+                                                                    cart</a></button>
+
+                                                            <% } %>
+
+
+                                                                <% } else { %>
+
+                                                                    &nbsp; &nbsp; <a class="btn btn-danger">Out of
+                                                                        stock</a>
+
+                                                                    <% } %>
+
+
+
+                                </div>
+
+                                <div class=" product_d_action">
+                                    <ul>
+                                        <li><a onclick="addToWishlist('<%= product._id %>','<%= cartId %>')"
+                                                title="Add to wishlist">+ Add to Wishlist</a></li>
+                                    </ul>
+                                </div>
+                                <div class="product_meta">
+                                    <span>Category: <a>
+                                            <%=product.category%>
+                                        </a></span>
+                                </div>
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--product details end-->
+
+        <!--product info start-->
+
+        <!--product info end-->
+
+        <!--product area start-->
+
+        <!--product area end-->
+
+        <!--product area start-->
+
+        <!--product area end-->
+
+        <!--brand area start-->
+
+        <!--brand area end-->
+<script src="assets/js/user.js"></script>
+        <!--footer area start-->
+        <%-include('_footer.ejs') -%>
+
+            <!--footer area end-->
+
+            <!-- modal area start-->
+
+            <!-- modal area end-->
+
+
+            <!-- JS
+============================================ -->
+            <!--jquery min js-->
+            <script src="/assets/js/vendor/jquery-3.4.1.min.js"></script>
+            <!--popper min js-->
+            <script src="/assets/js/popper.js"></script>
+            <!--bootstrap min js-->
+            <script src="/assets/js/bootstrap.min.js"></script>
+            <!--owl carousel min js-->
+            <script src="/assets/js/owl.carousel.min.js"></script>
+            <!--slick min js-->
+            <script src="/assets/js/slick.min.js"></script>
+            <!--magnific popup min js-->
+            <script src="/assets/js/jquery.magnific-popup.min.js"></script>
+            <!--counterup min js-->
+            <script src="/assets/js/jquery.counterup.min.js"></script>
+            <!--jquery countdown min js-->
+            <script src="/assets/js/jquery.countdown.js"></script>
+            <!--jquery ui min js-->
+            <script src="/assets/js/jquery.ui.js"></script>
+            <!--jquery elevatezoom min js-->
+            <script src="/assets/js/jquery.elevatezoom.js"></script>
+            <!--isotope packaged min js-->
+            <script src="/assets/js/isotope.pkgd.min.js"></script>
+            <!--slinky menu js-->
+            <script src="/assets/js/slinky.menu.js"></script>
+            <!-- Plugins JS -->
+            <script src="/assets/js/plugins.js"></script>
+
+            <!-- Main JS -->
+            <script src="/assets/js/main.js"></script>
+
+           <script src="/assets/js/addto.wishlist.js"></script>
+       
+
+<script>
+const addToCart = async (productId) => {
+
+try {
+event.preventDefault();
+    const addToCartButton = document.getElementById("addToCartBtn");
+    const newButton = document.querySelectorAll("#addToCartBtn")
+    let quantity = document.getElementById(productId).value;
+    
+    if(quantity === null){
+        quantity = 1
+    }
+          
+    const response = await fetch(`/addToCart?id=${productId}&quantity=${quantity}`, {
+
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    if(response.status === 401){
+        console.log(66)
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: "Product quantity exeeced",
+            showConfirmButton: true,
+            confirmButtonColor: "#79a206",
+        });
+        return;
+    }
+    
+    let data = await response.json();
+    if (data.message === "Item already in cart!!") {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product is already in cart.\n So quantity increased",
+            showConfirmButton: true,
+            confirmButtonColor: "#79a206",
+        });
+    } else {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Product successfully added to cart",
+            showConfirmButton: true,
+            confirmButtonColor: "#79a206",
+        });
+    }
+   
+} catch (error) {
+    console.error("An error occurred:", error);
+    // You can add code here to handle the error, show an error message, or perform any other necessary actions.
+}
+};
+
+
+
+           </script>
+
+
+
+
+
+
+            </body>
+
+
+            </html>

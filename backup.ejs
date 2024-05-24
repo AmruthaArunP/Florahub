@@ -1,0 +1,55 @@
+<div class="product_content list_content">
+                                                        
+    <h4 class="product_name"><a
+            href="/productDetails/<%=product.id %>">
+            <%=product.product_name%>
+        </a>
+
+    </h4>
+    <div class="price_box">
+        <span class="current_price">
+            <%=product.price%>/-
+        </span>
+    </div>
+    <div class="product_desc">
+        <p>
+            <%=product.product_details%>
+        </p>
+    </div>
+    <div class="action_links list_action_right">
+        <ul>
+            <input min="1" max="100" id="<%= product.id %>"
+                value="1" type="number" >
+               
+                <% if (product.stock) { %>
+
+                        <% if (product.isOnCart) { %>
+
+                            <button class="button"><a href="/viewCart/?id=<%= userData._id %>">Go To
+                                    Cart</a></button>       
+
+                            <% } else { %>
+                                <li class="add_to_cart"><a class="addToCartButton"
+                                    title="Add to cart"
+                                    onclick="addToCart('<%=product.id%>')"
+                                    id="addToCartBtn">Add to
+                                    cart</a></li>
+
+                                  <% } %>
+
+                                        
+                                            <% } else { %>
+
+                                                &nbsp; &nbsp; <a class="btn btn-danger">Out of
+                                                    stock</a>
+
+                                                <% } %>
+
+
+          
+       
+
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,125 @@
+<header>
+    <div class="main_header">
+
+        <div class="header_middle">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-4">
+                        <div class="logo">
+                            <!-- <a href="/index"><img src="assets/img/logo/logo.png" alt=""></a> -->
+                            <span>
+                                <strong>
+                                    <span  class="green-leaf"><a href="/index">Flora Hub</a></span>
+                                </strong>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-6 col-6">
+                        <div class="header_right_info">
+                            <div class="search_container">
+                                <form action="/shop" method="get">
+
+                                    <div class="search_box">
+                                        <input type="search" class="form-control" name="keyword" id="q" placeholder="Search product..."<% if(keyword){ %> value= <%= keyword %><% } %>
+                                        required>
+                                        <input type="hidden" name="filtertype" value="<%= filtertype || '' %>" /> <!-- Add this line -->
+
+                                        <button type="submit"><i class="icon-search"></i></button>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                         
+                              
+                            <div class="header_account_area">
+                                <div class="header_account-list top_links">
+                                    <a href="/user_login"><i class="icon-users"></i></a>
+
+                                </div>
+                                <% if (message==="true" ) { %>
+                                   
+
+                                    <div class="header_account-list  mini_cart_wrapper_wlist">
+                                        <a href="/wishlist" ><i class="icon-heart"></i><span
+                                                class="item_count">
+                                                <%=wishlistLength%>
+                                            </span></a>
+
+                                    </div>
+                                    <div class="header_account-list  mini_cart_wrapper">
+                                        <a href="javascript:void(0)"><i class="icon-shopping-bag"></i><span  id="cart_count"
+                                                class="item_count">
+                                                <%=cart.length%>
+                                            </span></a>
+                                        <!--mini cart-->
+                                        <%-include('_miniCart.ejs') -%>
+
+                                            <!--mini cart end-->
+                                    </div>
+                                    <%}%>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header_bottom sticky-header">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3">
+                        <div>
+                            <div>
+                                <p>DECOR WITH PLANTS</p>
+                            </div>
+                         
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <!--main menu start-->
+                        <div class="main_menu menu_position">
+                            <nav>
+                                <ul>
+                                    <!-- <li class="mega_items"><a id="shopLink" href="/index" class="active">shop</a></li> -->
+                                   
+                                    <li><a class="mega_items" id="homeLink" href="/index" class="active">home</a></li>
+                                    <li class="mega_items"><a id="shopLink" href="/shop" class="active">shop</a></li>
+                                    <li class="mega_items"><a id="contactLink" href="/contact" class="active">Contact us</a></li>
+                                    <!-- <li class="mega_items"><a id="aboutLink" href="/about" class="active">About us</a></li> -->
+                                   
+                                </ul>
+                            </nav>
+                        </div>
+
+                        <!--main menu end-->
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="call-support">
+                            <p>Call Support: <a href="tel:9876543210">9876543210</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var currentPath = window.location.pathname;
+
+        // Remove the "active" class from all links
+        var menuLinks = document.querySelectorAll(".main_menu a");
+        menuLinks.forEach(function (link) {
+            link.classList.remove("active");
+        });
+
+        // Add the "active" class to the link corresponding to the current page
+        menuLinks.forEach(function (link) {
+            if (link.getAttribute("href") === currentPath) {
+                link.classList.add("active");
+            }
+        });
+    });
+</script>

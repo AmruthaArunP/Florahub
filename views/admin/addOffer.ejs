@@ -1,0 +1,150 @@
+<%-include('./_header')-%>
+
+  <body>
+    <%-include('_left_sidebar')-%>
+
+
+
+     
+
+
+      <div class="main-content">
+        <%-include('_navbar')-%>
+
+
+        
+
+
+
+
+
+
+          <div class="row justify-content-center mt-5">
+            <div class="col-12 col-xl-7">
+              <h3 class="mb-3 mb-md-0">
+                Add Offer
+              </h3>
+
+              <form id="addOffer">
+                <div class="form-group mt-4 pt-3">
+                  <label class="form-label">
+                    Offer name:
+                  </label>
+                  <input type="text" class="form-control green-border" id="couponCode" name="couponCode">
+                </div>
+
+                <div class="form-group mt-4">
+                    <label class="form-label">
+                      Category:
+                    </label>
+                    <div class="input-group">
+                      <select class="form-control green-border" id="category" name="category">
+                        <option value="" disabled selected> - Select -</option>
+                        <% categorydata.forEach(async (data)=> { %>
+  
+                          <option value="<%=data.category %>">
+                            <%=data.category%>
+                          </option>
+  
+                          <% }) %>
+  
+                      </select>
+                    </div>
+                  </div>
+
+                <div class="form-group mt-4 pt-3">
+                    <label class="form-label">
+                      Discount:
+                    </label>
+                    <input type="text" class="form-control green-border" id="couponDiscount" name="couponDiscount">
+                  </div>
+              
+                <div class="form-group mt-4">
+                  <label class="form-label">
+                    Min Discount :
+                  </label>
+                  <input type="number" class="form-control green-border" id="minDiscount" name="minDiscount">
+
+                </div>
+                <div class="form-group mt-4">
+                  <label class="form-label">
+                    Mix Discount :
+                  </label>
+                  <input type="number" class="form-control green-border" id="maxDiscount" name="maxDiscount">
+
+                </div>
+                <div class="form-group mt-4">
+                  <label class="form-label">
+                    Expiry Date :
+                  </label>
+                  <input type="date" class="form-control green-border" id="couponDate" name="couponDate">
+
+                </div>
+              
+                <div class="d-grid gap-3 mt-5">
+                  <button class="btn btn-primary btn-lg hover-lift-light" id="addOffer" type="submit">Add</button>
+                  <!-- <button class="btn btn-link">Cancel</button> -->
+                  <br>
+                </div>
+              </form>
+             
+              <!-- <form action="/addCategoryOffer" method="POST">
+                <table style="width: 50%; margin: 0 auto;">
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <label class="form-label">
+                                Add Category Offer
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="form-label" style="text-align: right;">Offer Name:</label></td>
+                        <td><input type="text" class="form-control green-border" id="offerName" name="offerName"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="form-label" style="text-align: right;">Category:</label></td>
+                        <td>
+                            <select id="category" name="category" class="form-control green-border" required>
+                                <option value="electronics">Electronics</option>
+                                <option value="clothing">Clothing</option>
+                                <!-- Add more options for your categories -->
+                            <!-- </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><label class="form-label" style="text-align: right;">Expiry Date:</label></td>
+                        <td><input type="date" class="form-control green-border" id="offerExpiryDate" name="offerExpiryDate"></td>
+                    </tr>
+                    <tr>
+                        <td><label class="form-label" style="text-align: right;">Offer Percentage:</label></td>
+                        <td><input type="number" class="form-control green-border" id="offerPercentage" name="offerPercentage" min="0" max="100" step="1" required></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" style="text-align: center;">
+                            <div class="d-grid gap-3 mt-5">
+                                <button class="btn btn-primary btn-lg hover-lift-light" id="addCategoryOffer" type="submit">Add</button>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form> --> -->
+
+
+
+                
+              
+              
+              
+              
+              
+              
+              
+            </div>
+          </div>
+        
+      </div>
+
+ 
+
+
+      <%-include('_footer')-%>
